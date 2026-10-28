@@ -1,7 +1,47 @@
 diff --git a/libretro/libretro.c b/libretro/libretro.c
-index c9f479c..fbde261 100644
+index c9f479c..a452e36 100644
 --- a/libretro/libretro.c
 +++ b/libretro/libretro.c
+@@ -303,11 +303,11 @@ static gamepad_layout_t gp_modern = { // Based on Original XBOX Doom 3 Collectio
+ 		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_DOWN,   "D-Pad Down" },
+ 		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_RIGHT,  "D-Pad Right" },
+ 		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_B,      "Show Last Message" },
+-		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_A,      "Next Weapon" },
+-		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_X,      "Previous Weapon" },
++		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_A,      "Toggle Run" },
++		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_X,      "180 Turn" },
+ 		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_Y,      "Use" },
+-		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L,      "Quick Load" },
+-		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R,      "Quick Save" },
++		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L,      "Previous Weapon" },
++		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R,      "Next Weapon" },
+ 		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L2,     "Run" },
+ 		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R2,     "Fire" },
+ 		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L3,     "Toggle Run" },
+@@ -320,7 +320,7 @@ static gamepad_layout_t gp_modern = { // Based on Original XBOX Doom 3 Collectio
+ 		{ 0 },
+ 	},
+ 	{	// gamekey,             menukey
+-		{ &key_enter,           &key_menu_backspace }, // RETRO_DEVICE_ID_JOYPAD_B
++		{ &key_enter,           &key_menu_enter }, // RETRO_DEVICE_ID_JOYPAD_B
+ 		{ &key_use,             &key_menu_enter },     // RETRO DEVICE_ID_JOYPAD_Y
+ 		{ &key_map,             &key_menu_backspace }, // RETRO_DEVICE_ID_JOYPAD_SELECT
+ 		{ &key_menu_escape,     &key_menu_escape },    // RETRO_DEVICE_ID_JOYPAD_START
+@@ -328,10 +328,10 @@ static gamepad_layout_t gp_modern = { // Based on Original XBOX Doom 3 Collectio
+ 		{ &key_map_down,        &key_menu_down },      // RETRO_DEVICE_ID_JOYPAD_DOWN
+ 		{ &key_map_left,        &key_menu_left },      // RETRO_DEVICE_ID_JOYPAD_LEFT
+ 		{ &key_map_right,       &key_menu_right },     // RETRO_DEVICE_ID_JOYPAD_RIGHT
+-		{ &key_weaponcycleup,   &key_menu_enter },     // RETRO_DEVICE_ID_JOYPAD_A
+-		{ &key_weaponcycledown, &key_menu_backspace }, // RETRO_DEVICE_ID_JOYPAD_X
+-		{ &key_quickload,       &key_menu_left },      // RETRO_DEVICE_ID_JOYPAD_L1
+-		{ &key_quicksave,       &key_menu_right },     // RETRO_DEVICE_ID_JOYPAD_R1
++		{ &key_autorun,         &key_menu_backspace },     // RETRO_DEVICE_ID_JOYPAD_A
++		{ &key_reverse,         &key_menu_backspace }, // RETRO_DEVICE_ID_JOYPAD_X
++		{ &key_weaponcycledown, &key_menu_left },      // RETRO_DEVICE_ID_JOYPAD_L1
++		{ &key_weaponcycleup,   &key_menu_right },     // RETRO_DEVICE_ID_JOYPAD_R1
+ 		{ &key_speed,           &key_menu_backspace }, // RETRO_DEVICE_ID_JOYPAD_L2
+ 		{ &key_fire,            &key_menu_enter },     // RETRO_DEVICE_ID_JOYPAD_R2
+ 		{ &key_autorun,         &key_menu_enter },     // RETRO_DEVICE_ID_JOYPAD_L3
 @@ -4186,6 +4186,11 @@ dbool   I_StartDisplay(void)
     direct_fb_data  = NULL;
     direct_fb_pitch = 0;

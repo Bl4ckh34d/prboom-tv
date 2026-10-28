@@ -29,7 +29,7 @@ Keep original game data on USB. Keep saves in a writable directory. `config/` co
 
 E1M1 movement, shooting, persistent HUD and native save/load passed. 640x400 with two render threads and Vulkan/threaded/VSync: 60 presented FPS in a 21.8-second sample. Vertical look was separately verified in E1M1.
 
-Validated with Ultimate DOOM. Other WADs and DOOM II are not covered by the recorded TV acceptance. Native save/load tested; no claim that controller quicksave/quickload shortcuts were tested.
+The follow-up verified both Ultimate DOOM and DOOM II: gameplay movement/fire, L3 save state, R3 restoration of position and ammunition, Reset/load, fast-forward and Close Content. Modern controller device 773 uses A to confirm, X to activate, LB/RB for weapons and RT to fire; the example remaps reserve L2/L3/R3 for frontend shortcuts. Other WADs remain untested. The same compiled core serves both games; separate filenames are optional for frontend organization.
 
 These are bounded historical gameplay checks on one Android 11 ARMv7/Mali-G52 TV. Physical controller feel and speaker quality were not independently measured. See `docs/verification.md` for publication-time build checks.
 
